@@ -14,20 +14,30 @@ spec:
         app: backend
     spec:
       securityContext:
-        [cite_start]runAsNonRoot: true # Security [cite: 28]
+        runAsNonRoot: true
         runAsUser: 1000
       containers:
       - name: backend
-        [cite_start]image: rageenawahab/ai-backend:latest # CI/CD updates this tag [cite: 48]
+        image: rageenawahab/ai-backend:latest
         ports:
         - containerPort: 5000
         livenessProbe:
-          [cite_start]httpGet: {path: /health, port: 5000} # Health probe [cite: 36]
+          httpGet:
+            path: /health
+            port: 5000
         readinessProbe:
-          httpGet: {path: /health, port: 5000}
-        [cite_start]resources: # Resource limits [cite: 35]
-          limits: {cpu: "500m", memory: "512Mi"}
-          requests: {cpu: "250m", memory: "256Mi"}
+          httpGet:
+            path: /health
+            port: 5000
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+          requests:
+            cpu: "250m"
+            memory: "256Mi"
         envFrom:
-        - configMapRef: {name: app-config}
-        - [cite_start]secretRef: {name: app-secrets} # No hardcoded secrets [cite: 54]
+        - configMapRef:
+            name: app-config
+        - secretRef:
+            name: app-secrets
