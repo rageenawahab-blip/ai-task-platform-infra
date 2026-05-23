@@ -4,7 +4,7 @@ metadata:
   name: ai-worker
   namespace: ai-task-platform
 spec:
-  replicas: 2 # Scaled to multiple replicas out-of-the-box for high availability
+  replicas: 2
   selector:
     matchLabels:
       app: ai-worker
@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: worker
-        image: your-dockerhub-username/ai-worker:latest # Change to your registry path later
+        image: rageenawahab/ai-worker:v1  # Updated to your image
         env:
         - name: REDIS_URL
           value: "redis://redis:6379"

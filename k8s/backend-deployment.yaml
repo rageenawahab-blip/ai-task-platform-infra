@@ -3,3 +3,18 @@ kind: Deployment
 metadata:
   name: backend-deployment
   namespace: ai-task-platform
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: rageenawahab/ai-backend:v1  # This is the image you built and pushed
+        ports:
+        - containerPort: 8000              # Change this to your app's port
