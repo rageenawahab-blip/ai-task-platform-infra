@@ -1,0 +1,30 @@
+﻿apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ai-worker
+  namespace: ai-task-platform
+spec:
+  replicas: 2 # Scaled to multiple replicas out-of-the-box for high availability
+  selector:
+    matchLabels:
+      app: ai-worker
+  template:
+    metadata:
+      labels:
+        app: ai-worker
+    spec:
+      containers:
+      - name: worker
+        image: your-dockerhub-username/ai-worker:latest # Change to your registry path later
+        env:
+        - name: REDIS_URL
+          value: "redis://redis:6379"
+        - name: MONGO_URI
+          value: "mongodb://mongodb:27017/aitasks"
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+          requests:
+            cpu: "250m"
+            memory: "256Mi"

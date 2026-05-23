@@ -1,0 +1,18 @@
+﻿apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ai-task-platform-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/rageenawahab-blip/ai-task-platform.git' # Replace with your real repo link
+    targetRevision: HEAD
+    path: k8s
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: ai-task-platform
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
