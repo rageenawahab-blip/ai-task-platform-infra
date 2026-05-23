@@ -1,10 +1,10 @@
 ﻿apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend-deployment
+  name: backend
   namespace: ai-task-platform
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: backend
@@ -13,8 +13,21 @@ spec:
       labels:
         app: backend
     spec:
+      securityContext:
+        [cite_start]runAsNonRoot: true # Security [cite: 28]
+        runAsUser: 1000
       containers:
       - name: backend
-        image: rageenawahab/ai-backend:v1  # This is the image you built and pushed
+        [cite_start]image: rageenawahab/ai-backend:latest # CI/CD updates this tag [cite: 48]
         ports:
-        - containerPort: 8000              # Change this to your app's port
+        - containerPort: 5000
+        livenessProbe:
+          [cite_start]httpGet: {path: /health, port: 5000} # Health probe [cite: 36]
+        readinessProbe:
+          httpGet: {path: /health, port: 5000}
+        [cite_start]resources: # Resource limits [cite: 35]
+          limits: {cpu: "500m", memory: "512Mi"}
+          requests: {cpu: "250m", memory: "256Mi"}
+        envFrom:
+        - configMapRef: {name: app-config}
+        - [cite_start]secretRef: {name: app-secrets} # No hardcoded secrets [cite: 54]

@@ -17,4 +17,4 @@ spec:
       - name: frontend
         image: rageenawahab/ai-frontend:v1  # This is the image you built and pushed
         ports:
-        - containerPort: 8000              # Change this to your app's port
+        - containerPort: 5173         # Change this to your app's port
