@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/rageenawahab-blip/ai-task-platform.git' # Replace with your real repo link
+    repoURL: 'https://github.com/rageenawahab-blip/ai-task-platform-infra.git' # Replace with your real repo link
     targetRevision: HEAD
     path: k8s
   destination:
