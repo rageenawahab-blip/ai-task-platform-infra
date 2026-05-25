@@ -14,12 +14,12 @@ spec:
         app: ai-worker
     spec:
       containers:
-      - name: worker
-        image: rageenawahab/ai-worker:v1
-        env:
-        # 1. Fix the Redis Host connection using the cluster domain
+      - env:
         - name: REDIS_HOST
-          value: "redis.ai-task-platform.svc.cluster.local"
+          value: redis.ai-task-platform.svc.cluster.local
+        - name: MONGO_URI
+          value: mongodb://mongo-service:27017/ai_tasks
+        image: rageenawahab/ai-worker:v1
         
         # 2. Fix the Mongo connection string to match your 'mongo-service' name
         - name: MONGO_URI
