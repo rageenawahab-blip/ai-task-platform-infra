@@ -18,7 +18,7 @@ spec:
         runAsUser: 1000
       containers:
       - name: backend
-        image: rageenawahab/ai-backend:latest
+        image: rageenawahab/ai-backend:v2
         ports:
         - containerPort: 5000
         livenessProbe:
